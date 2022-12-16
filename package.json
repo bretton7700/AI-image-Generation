@@ -1,0 +1,30 @@
+{
+  "name": "ai-image-generation",
+  "version": "1.0.0",
+  "description": "This is a combination of nodejs and openai to generate images",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index",
+    "dev": "nodemon index"
+
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bretton7700/AI-image-Generation.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bretton7700/AI-image-Generation/issues"
+  },
+  "homepage": "https://github.com/bretton7700/AI-image-Generation#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "openai": "^3.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
