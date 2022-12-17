@@ -1,7 +1,7 @@
 #RUN rc-update add docker boot
 FROM ubuntu:latest
 CMD ['bash']
-FROM node:14.18.1
+FROM node:16.17.1
 #app directory
 WORKDIR /usr/src/app
 #install app dependencies
