@@ -6,7 +6,6 @@
   "scripts": {
     "start": "node index",
     "dev": "nodemon index"
-
   },
   "repository": {
     "type": "git",
@@ -20,6 +19,7 @@
   },
   "homepage": "https://github.com/bretton7700/AI-image-Generation#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "openai": "^3.1.0"
