@@ -81,6 +81,12 @@ async function addLogoToImage(imageUrl, logoUrl) {
   return imageUrlWithLogo;
 }
 
+async function setDownloadLink(imageUrl) {
+  const downloadLink = document.querySelector('#download-link');
+  downloadLink.href = imageUrl;
+  downloadLink.setAttribute('download', 'generated-image.png');
+  downloadLink.style.display = 'inline-block';
+}
 
 
 
@@ -107,7 +113,9 @@ async function generateImageRequest(prompt, size, logoUrl) {
     const generatedImageData = await response.json();
     const imageUrl = generatedImageData.data;
     const imageUrlWithLogo = logoUrl ? await addLogoToImage(imageUrl, logoUrl) : imageUrl; // Add the logo to the generated image if logoUrl is not null
+    // document.querySelector('#image').src = imageUrlWithLogo;
     document.querySelector('#image').src = imageUrlWithLogo;
+    await setDownloadLink(imageUrlWithLogo);
 
     removeSpinner();
   } catch (error) {
@@ -116,13 +124,13 @@ async function generateImageRequest(prompt, size, logoUrl) {
 }
 
 
-  
-  function showSpinner() {
-    document.querySelector('.spinner').classList.add('show');
-  }
-  
-  function removeSpinner() {
-    document.querySelector('.spinner').classList.remove('show');
-  }
-  
-  document.querySelector('#image-form').addEventListener('submit', onSubmit);
+
+function showSpinner() {
+  document.querySelector('.spinner').classList.add('show');
+}
+
+function removeSpinner() {
+  document.querySelector('.spinner').classList.remove('show');
+}
+
+document.querySelector('#image-form').addEventListener('submit', onSubmit);
