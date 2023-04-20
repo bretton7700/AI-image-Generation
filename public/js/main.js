@@ -1,3 +1,8 @@
+function closeModal() {
+  const confirmModal = document.querySelector('#confirmModal');
+  confirmModal.style.display = 'none';
+}
+
 function onSubmit(e) {
   e.preventDefault();
 
@@ -6,31 +11,51 @@ function onSubmit(e) {
 
   const prompt = document.querySelector('#prompt').value;
   const size = document.querySelector('#size').value;
-  const logoInput = document.querySelector('#logo-upload');
-  const addLogo = confirm('Do you want to add your brand logo to the image?');
 
   if (prompt === '') {
     alert('Please add some text');
     return;
   }
 
-  if (addLogo) {
-    const logoFile = logoInput.files[0];
-    if (!logoFile) {
-      alert('Please upload your logo');
-      return;
-    }
-
-    const reader = new FileReader();
-    reader.readAsDataURL(logoFile);
-    reader.onloadend = function () {
-      const logoUrl = reader.result;
-      generateImageRequest(prompt, size, logoUrl);
-    };
-  } else {
-    generateImageRequest(prompt, size, null);
-  }
+  // Show the custom confirm modal
+  const confirmModal = document.querySelector('#confirmModal');
+  confirmModal.style.display = 'block';
 }
+
+document.querySelector('#confirmYes').addEventListener('click', function () {
+  const logoInput = document.querySelector('#logo-upload');
+  const prompt = document.querySelector('#prompt').value;
+  const size = document.querySelector('#size').value;
+  handleLogoInput(logoInput, prompt, size);
+  closeModal();
+});
+
+document.querySelector('#confirmNo').addEventListener('click', function () {
+  const prompt = document.querySelector('#prompt').value;
+  const size = document.querySelector('#size').value;
+  generateImageRequest(prompt, size, null);
+  closeModal();
+});
+
+
+document.querySelector('#image-form').addEventListener('submit', onSubmit);
+
+
+function handleLogoInput(logoInput, prompt, size) {
+  const logoFile = logoInput.files[0];
+  if (!logoFile) {
+    alert('Please upload your logo');
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.readAsDataURL(logoFile);
+  reader.onloadend = function () {
+    const logoUrl = reader.result;
+    generateImageRequest(prompt, size, logoUrl);
+  };
+}
+
 
 
 
